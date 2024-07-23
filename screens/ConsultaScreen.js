@@ -1,38 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '@emotion/react';
 import ConsultaCard from '../components/ConsultaCard';
 
-const consultas = [
-  {
-    title: "Prendedores de Roupa",
-    image: require('../assets/terapeuta.png')
-  },
-  {
-    title: "Encaixe Certo",
-    image: require('../assets/psicologo.png')
-  },
-  {
-    title: "Corte Criativo",
-    image: require('../assets/fonoaudiologo.png')
-  },
-  {
-  title: "Jogo da Memoria",
-  image: require('../assets/fonoaudiologo.png')
-  }
-];
+const { height, width } = Dimensions.get('window');
 
+const consultas = [
+  { title: "Prendedores de Roupa" },
+  { title: "Encaixe Certo" },
+  { title: "Corte Criativo" },
+  { title: "Jogo da Memoria" }
+];
 
 const ConsultaScreen = ({ route, navigation }) => {
   const theme = useTheme();
   const { userEmail } = route.params;
 
-
-
-  const handleCardPress = (therapistName) => {
-    navigation.navigate('AtividadeScreen', { therapistName});
-  }; //função que leva ate pagina de atividades ou de pacientes,
+  const handleCardPress = (title) => {
+    navigation.navigate('AtividadeScreen', { title });
+  };
 
   const handleInicioPress = () => {
     navigation.navigate('Home');
@@ -41,27 +28,27 @@ const ConsultaScreen = ({ route, navigation }) => {
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <View style={[styles.header, { backgroundColor: theme.colors.primary }]}>
-        <Text style={[styles.headerText, { color: theme.colors.surface }]}>{ `bem vindo, ${userEmail}!`}</Text>
+        <Text style={[styles.headerText, { color: theme.colors.surface }]}>Atividades Disponíveis</Text>
       </View>
       
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         {consultas.map((consulta, index) => (
           <TouchableOpacity
             key={index}
-            onPress={() => handleCardPress(consulta.name)}
+            onPress={() => handleCardPress(consulta.title)}
             style={styles.cardContainer}
           >
-            <ConsultaCard title={consulta.title} name={consulta.name} image={consulta.image} />
+            <ConsultaCard title={consulta.title} />
           </TouchableOpacity>
         ))}
       </ScrollView>
         
       <View style={[styles.footer, { backgroundColor: theme.colors.primary }]}>
-      <TouchableOpacity onPress={() => handleInicioPress()} style={styles.footerItem}>
+        <TouchableOpacity onPress={handleInicioPress} style={styles.footerItem}>
           <Ionicons name="home-outline" size={30} color={theme.colors.surface} />
           <Text style={[styles.footerText, { color: theme.colors.surface }]}>Principal</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => handleInicioPress()} style={styles.footerItem}>
+        <TouchableOpacity onPress={handleInicioPress} style={styles.footerItem}>
           <Ionicons name="settings-outline" size={30} color={theme.colors.surface} />
           <Text style={[styles.footerText, { color: theme.colors.surface }]}>Configurações</Text>
         </TouchableOpacity>
@@ -77,32 +64,37 @@ const styles = StyleSheet.create({
   header: {
     alignItems: 'center',
     justifyContent: 'center',
-    height: '15%',
+    height: height * 0.15,  // 15% da altura da tela
+    backgroundColor: '#277BC0',
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    paddingTop: 10,
   },
   headerText: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 'bold',
+    color: '#FFFFFF',
   },
   scrollViewContent: {
-    flexGrow: 1,
-    padding: '5%',
+    paddingVertical: 20,
+    paddingHorizontal: 20,
   },
   cardContainer: {
-    height: '30%',
-    marginBottom: '5%', 
-    paddingBottom: '10%'
+    marginBottom: 20,
   },
   footer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    height: '10%',
+    height: height * 0.1,  // 10% da altura da tela
+    backgroundColor: '#277BC0',
   },
   footerItem: {
     alignItems: 'center',
   },
   footerText: {
     fontSize: 12,
+    color: '#FFFFFF',
   },
 });
 
