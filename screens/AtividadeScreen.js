@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '@emotion/react';
+import { Video } from 'expo-av';
 
 const { height, width } = Dimensions.get('window');
 
@@ -15,15 +16,21 @@ const atividade = {
     "Mostre à criança como prender os grampos nos cartões, combinando as cores dos grampos com as formas.",
     "Peça à criança para tentar fazer isso sozinha, ajudando apenas se necessário.",
     "Elogie o esforço dela, independentemente de como ela realiza a tarefa."
-  ]
+  ],
+  videoUri: require('../assets/video.mp4'), // Adicione o caminho do vídeo aqui
 };
 
 const AtividadeScreen = ({ route, navigation }) => {
   const { title } = route.params;
   const theme = useTheme();
+  const [isVideoVisible, setIsVideoVisible] = useState(false);
 
   const handleInicioPress = () => {
     navigation.navigate('Home');
+  };
+
+  const handleVideoPress = () => {
+    setIsVideoVisible(true);
   };
 
   return (
@@ -36,10 +43,25 @@ const AtividadeScreen = ({ route, navigation }) => {
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
-        <View style={styles.videoContainer}>
-          <Ionicons name={atividade.videoIcon} size={50} color={theme.colors.surface} />
-          <Text style={[styles.videoText, { color: theme.colors.surface }]}>{atividade.videoTitle}</Text>
-        </View>
+        {!isVideoVisible ? (
+          <TouchableOpacity onPress={handleVideoPress} style={styles.videoContainer}>
+            <Ionicons name={atividade.videoIcon} size={50} color={theme.colors.surface} />
+            <Text style={[styles.videoText, { color: theme.colors.surface }]}>{atividade.videoTitle}</Text>
+          </TouchableOpacity>
+        ) : (
+          <View style={styles.videoPlayerContainer}>
+            <Video
+              source={atividade.videoUri}
+              rate={1.0}
+              volume={1.0}
+              isMuted={false}
+              resizeMode="contain"
+              shouldPlay
+              useNativeControls
+              style={{ width: '100%', height: height * 0.4 }}
+            />
+          </View>
+        )}
 
         <View style={styles.infoContainer}>
           <Text style={styles.sectionTitle}>Objetivo:</Text>
@@ -78,20 +100,18 @@ const styles = StyleSheet.create({
   header: {
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'center',
-    height: height * 0.15,  // 15% da altura da tela
-    backgroundColor: '#277BC0',
+    justifyContent: 'space-between',
+    height: height * 0.1,
+    paddingHorizontal: 10,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
-    paddingTop: 10,
-  },
-  headerText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#FFFFFF',
   },
   backButton: {
     padding: 10,
+  },
+  headerText: {
+    fontSize: 18,
+    fontWeight: 'bold',
   },
   scrollViewContent: {
     flexGrow: 1,
@@ -110,6 +130,11 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  videoPlayerContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 20,
   },
   infoContainer: {
     backgroundColor: '#fff',
