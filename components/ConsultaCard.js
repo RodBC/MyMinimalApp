@@ -1,26 +1,18 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, Image } from 'react-native';
 import { useTheme } from '@emotion/react';
 
 const { height, width } = Dimensions.get('window');
 
-const icons = {
-  "Prendedores de Roupa": "../assets/pregador.png",
-  "Encaixe Certo": "../assets/quebra.png",
-  "Corte Criativo": "../assets/tesoura.png",
-  "Jogo da Memoria": "../assets/cartas.png",
-};
-
-const ConsultaCard = ({ title }) => {
+const ConsultaCard = ({ title, image }) => {
   const theme = useTheme();
-  const iconName = icons[title] 
 
   return (
     <View style={[styles.card, { backgroundColor: theme.colors.primary }]}>
       <View style={styles.textContainer}>
         <Text style={[styles.title, { color: theme.colors.surface }]}>{title}</Text>
       </View>
-      <Image source={require(iconName)} size={50} color={theme.colors.surface} style={styles.icon} />
+      <Image source={image} style={styles.image} resizeMode="contain" />
 
     </View>
   );
@@ -41,9 +33,10 @@ const styles = StyleSheet.create({
     height: height * 0.15,  // 15% da altura da tela
     width: '100%',
   },
-  icon: {
-    marginLeft: 10,
-  },
+  image: {
+    width: '20%', 
+    height: '80%', 
+    },
   textContainer: {
     flex: 1,
   },

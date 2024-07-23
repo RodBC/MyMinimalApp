@@ -1,78 +1,71 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '@emotion/react';
-import AtividadeCard from '../components/AtividadeCard';
 
-const cards = [
-  {
-    title: "Atividade 1",
-    rating: 3,
-    image: require('../assets/atividade1.png')
-  },
-  {
-    title: "Atividade 2",
-    rating: 1,
-    image: require('../assets/atividade2.png')
-  },
-  {
-    title: "Atividade 3",
-    rating: 2,
-    image: require('../assets/atividade3.png')
-  }
-];
+const { height, width } = Dimensions.get('window');
 
+const atividade = {
+  title: "Prendedores de Roupa",
+  videoTitle: "Assistir Vídeo",
+  videoIcon: "play-circle-outline",
+  objetivo: "Desenvolver a coordenação motora fina e o reconhecimento de cores e formas.",
+  materiais: "Grampo de prendedor de roupa coloridos e cartões com formas desenhadas.",
+  comoFazer: [
+    "Mostre à criança como prender os grampos nos cartões, combinando as cores dos grampos com as formas.",
+    "Peça à criança para tentar fazer isso sozinha, ajudando apenas se necessário.",
+    "Elogie o esforço dela, independentemente de como ela realiza a tarefa."
+  ]
+};
 
 const AtividadeScreen = ({ route, navigation }) => {
-  const { therapistName } = route.params;
-
+  const { title } = route.params;
   const theme = useTheme();
-
-  const handleAtividadePress = (atividade) => {
-    navigation.navigate('AtividadeDetalhes', { atividade });
-  };
 
   const handleInicioPress = () => {
     navigation.navigate('Home');
   };
 
-
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
-      
       <View style={[styles.header, { backgroundColor: theme.colors.primary }]}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
           <Ionicons name="arrow-back" size={24} color={theme.colors.surface} />
         </TouchableOpacity>
-        <Text style={[styles.headerText, { color: theme.colors.surface }]}>{therapistName}</Text>
+        <Text style={[styles.headerText, { color: theme.colors.surface }]}>{title}</Text>
       </View>
-      
-      <ScrollView contentContainerStyle={styles.scrollViewContent}>
-   
-        {cards.map((atividade, index) => (
 
-          <TouchableOpacity key={index} onPress={() => handleAtividadePress(atividade)} 
-          style={styles.cardContainer}>
-          
-          <AtividadeCard key={index} title={atividade.title} rating={atividade.rating} image={atividade.image}/>
-          
-          </TouchableOpacity>
-        
-        ))}
+      <ScrollView contentContainerStyle={styles.scrollViewContent}>
+        <View style={styles.videoContainer}>
+          <Ionicons name={atividade.videoIcon} size={50} color={theme.colors.surface} />
+          <Text style={[styles.videoText, { color: theme.colors.surface }]}>{atividade.videoTitle}</Text>
+        </View>
+
+        <View style={styles.infoContainer}>
+          <Text style={styles.sectionTitle}>Objetivo:</Text>
+          <Text style={styles.sectionText}>{atividade.objetivo}</Text>
+
+          <Text style={styles.sectionTitle}>Materiais:</Text>
+          <Text style={styles.sectionText}>{atividade.materiais}</Text>
+
+          <Text style={styles.sectionTitle}>Como fazer</Text>
+          <View style={styles.howToContainer}>
+            {atividade.comoFazer.map((step, index) => (
+              <Text key={index} style={styles.stepText}>{`\u2022 ${step}`}</Text>
+            ))}
+          </View>
+        </View>
       </ScrollView>
-      
-      
+
       <View style={[styles.footer, { backgroundColor: theme.colors.primary }]}>
-        <TouchableOpacity onPress={() => handleInicioPress()} style={styles.footerItem}>
+        <TouchableOpacity onPress={handleInicioPress} style={styles.footerItem}>
           <Ionicons name="home-outline" size={30} color={theme.colors.surface} />
           <Text style={[styles.footerText, { color: theme.colors.surface }]}>Principal</Text>
-
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => handleInicioPress()} style={styles.footerItem}>          
+        <TouchableOpacity onPress={handleInicioPress} style={styles.footerItem}>
           <Ionicons name="settings-outline" size={30} color={theme.colors.surface} />
           <Text style={[styles.footerText, { color: theme.colors.surface }]}>Configurações</Text>
         </TouchableOpacity>
-        
       </View>
     </View>
   );
@@ -84,37 +77,82 @@ const styles = StyleSheet.create({
   },
   header: {
     alignItems: 'center',
-    justifyContent: 'center',
     flexDirection: 'row',
-    height: '15%',
+    justifyContent: 'center',
+    height: height * 0.15,  // 15% da altura da tela
+    backgroundColor: '#277BC0',
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    paddingTop: 10,
   },
   headerText: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
+    color: '#FFFFFF',
+  },
+  backButton: {
+    padding: 10,
   },
   scrollViewContent: {
     flexGrow: 1,
     padding: '5%',
   },
-  cardContainer: {
-    height: '30%',
-    marginBottom: '5%', 
+  videoContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#277BC0',
+    borderRadius: 20,
+    padding: 20,
+    marginBottom: 20,
+    flexDirection: 'row',
   },
-  cardContainerPaciente: {
-    height: '15%',
-    marginBottom: '5%', 
+  videoText: {
+    marginLeft: 10,
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  infoContainer: {
+    backgroundColor: '#fff',
+    borderRadius: 20,
+    padding: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  sectionTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  sectionText: {
+    fontSize: 14,
+    marginBottom: 20,
+  },
+  howToContainer: {
+    borderColor: '#ddd',
+    borderWidth: 1,
+    borderRadius: 10,
+    padding: 10,
+    backgroundColor: '#f9f9f9',
+  },
+  stepText: {
+    fontSize: 14,
+    marginBottom: 10,
   },
   footer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    height: '10%',
+    height: height * 0.1,
   },
   footerItem: {
     alignItems: 'center',
   },
   footerText: {
     fontSize: 12,
+    color: '#FFFFFF',
   },
 });
 

@@ -8,7 +8,7 @@ import HomeScreen from './screens/HomeScreen';
 import SplashScreen from './screens/SplashScreen';
 import ConsultaScreen from './screens/ConsultaScreen';
 import AtividadeScreen from './screens/AtividadeScreen';
-import AtividadeDetalhesScreen from './screens/AtividadeDetalhesScreen';
+// import AtividadeDetalhesScreen from './screens/AtividadeDetalhesScreen';
 // import PacienteDetalhesScreen from './screens/PacienteDetalhesScreen';
 
 import { theme } from './styles/theme';
@@ -25,7 +25,7 @@ const App = () => {
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Consulta" component={ConsultaScreen} />
             <Stack.Screen name="AtividadeScreen" component={AtividadeScreen} />
-            <Stack.Screen name="AtividadeDetalhes" component={AtividadeDetalhesScreen} />
+            {/* <Stack.Screen name="AtividadeDetalhes" component={AtividadeDetalhesScreen} /> */}
             {/* <Stack.Screen name="PacienteDetalhesScreen" component={PacienteDetalhesScreen} /> */}
           </Stack.Navigator>
         </PaperProvider>

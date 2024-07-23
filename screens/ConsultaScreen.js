@@ -7,15 +7,30 @@ import ConsultaCard from '../components/ConsultaCard';
 const { height, width } = Dimensions.get('window');
 
 const consultas = [
-  { title: "Prendedores de Roupa" },
-  { title: "Encaixe Certo" },
-  { title: "Corte Criativo" },
-  { title: "Jogo da Memoria" }
+  {
+    title: "Prendedores de Roupa",
+    // name: "Nome da Terapeuta",
+    image: require('../assets/pregrador.png')
+  },
+  {
+    title: "Encaixe Certo",
+    // name: "Nome do Psicólogo",
+    image: require('../assets/quebra.png')
+  },
+  {
+    title: "Corte Criativo",
+    // name: "Nome do Profissional",
+    image: require('../assets/tesoura.png')
+  },
+  {
+  title: "Jogo da Memoria",
+  // name: "Nome do Profissional",
+  image: require('../assets/cartas.png')
+}
 ];
 
-const ConsultaScreen = ({ route, navigation }) => {
+const ConsultaScreen = ({ navigation }) => {
   const theme = useTheme();
-  const { userEmail } = route.params;
 
   const handleCardPress = (title) => {
     navigation.navigate('AtividadeScreen', { title });
@@ -38,8 +53,8 @@ const ConsultaScreen = ({ route, navigation }) => {
             onPress={() => handleCardPress(consulta.title)}
             style={styles.cardContainer}
           >
-            <ConsultaCard title={consulta.title} />
-          </TouchableOpacity>
+            <ConsultaCard title={consulta.title} image={consulta.image} />
+            </TouchableOpacity>
         ))}
       </ScrollView>
         
