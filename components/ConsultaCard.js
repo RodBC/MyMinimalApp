@@ -1,25 +1,18 @@
+
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { View, Text, Image, StyleSheet } from 'react-native';
 import { useTheme } from '@emotion/react';
 
-const icons = {
-  "Prendedores de Roupa": "md-briefcase",
-  "Encaixe Certo": "md-puzzle",
-  "Corte Criativo": "md-cut",
-  "Jogo da Memoria": "md-book",
-};
-
-const ConsultaCard = ({ title }) => {
+const ConsultaCard = ({ title, name, image }) => {
   const theme = useTheme();
-  const iconName = icons[title] || "md-help"; // Default icon if title not found
 
   return (
     <View style={[styles.card, { backgroundColor: theme.colors.primary }]}>
+      <Image source={image} style={styles.image} resizeMode="contain" />
       <View style={styles.textContainer}>
         <Text style={[styles.title, { color: theme.colors.surface }]}>{title}</Text>
+        <Text style={[styles.name, { color: theme.colors.surface }]}>{name}</Text>
       </View>
-      <Ionicons name={iconName} size={50} color={theme.colors.surface} style={styles.icon} />
     </View>
   );
 };
@@ -29,25 +22,30 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: 10,
-    padding: 20,
-    marginVertical: 10,
+    padding: '2%',
+    marginVertical: '2%',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    height: 100,
+    height: '100%', 
     width: '100%',
   },
-  icon: {
-    marginLeft: 10,
+  image: {
+    width: '20%', 
+    height: '80%', 
   },
   textContainer: {
-    flex: 1,
+    marginLeft: '5%',
+    width: '75%', 
   },
   title: {
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  name: {
+    fontSize: 14,
   },
 });
 
