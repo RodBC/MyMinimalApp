@@ -4,7 +4,7 @@ import { useTheme } from '@emotion/react';
 
 const { height, width } = Dimensions.get('window');
 
-const ConsultaCard = ({ title, image, text }) => {
+const ConsultaCardMod = ({ title, text }) => {
   const theme = useTheme();
 
   return (
@@ -13,7 +13,6 @@ const ConsultaCard = ({ title, image, text }) => {
         <Text style={[styles.title, { color: theme.colors.surface }]}>{title}</Text>
         <Text style={[styles.text, { color: theme.colors.surface }]}>{text}</Text>
       </View>
-      <Image source={image} style={styles.image} resizeMode="contain" />
 
     </View>
   );
@@ -51,4 +50,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ConsultaCard;
+export default ConsultaCardMod;

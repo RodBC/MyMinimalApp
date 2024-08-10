@@ -8,6 +8,8 @@ import HomeScreen from './screens/HomeScreen';
 import SplashScreen from './screens/SplashScreen';
 import ConsultaScreen from './screens/ConsultaScreen';
 import AtividadeScreen from './screens/AtividadeScreen';
+import RegulacaoEmocionalScreen from './screens/RegulacaoEmocionalScreen'
+import IdentificacaoEmocoesScreen from './screens/IdentificacaoEmocoesScreen'
 // import AtividadeDetalhesScreen from './screens/AtividadeDetalhesScreen';
 // import PacienteDetalhesScreen from './screens/PacienteDetalhesScreen';
 
@@ -25,6 +27,8 @@ const App = () => {
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Consulta" component={ConsultaScreen} />
             <Stack.Screen name="AtividadeScreen" component={AtividadeScreen} />
+            <Stack.Screen name="RegulacaoEmocionalScreen" component={RegulacaoEmocionalScreen} />
+            <Stack.Screen name="IdentificacaoEmocoesScreen" component={IdentificacaoEmocoesScreen} />
             {/* <Stack.Screen name="AtividadeDetalhes" component={AtividadeDetalhesScreen} /> */}
             {/* <Stack.Screen name="PacienteDetalhesScreen" component={PacienteDetalhesScreen} /> */}
           </Stack.Navigator>

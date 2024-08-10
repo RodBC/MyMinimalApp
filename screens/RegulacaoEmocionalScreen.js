@@ -9,9 +9,38 @@ const { height, width } = Dimensions.get('window');
 
 const consultas = [
   {
-    title: "Regulação Emocional",
+    title: "1. Identificação de Emoções",
+    text: "Aprender a reconhecer diferentes emoções através de expressões faciais",
+    //name: "Nome da Terapeuta",
+    //image: require('../assets/pregrador.png')
+  },
+
+  {
+    title: "2. Autopercepção Emocional",
+    text: "Reconhecer e nomear as próprias emoções",
     // name: "Nome da Terapeuta",
-    image: require('../assets/emocao.png')
+    //image: require('../assets/tesoura.png')
+  },
+
+  {
+    title: "3. Gestão de Emoções",
+    text: "Estratégias para lidar com emoções intensas",
+    // name: "Nome da Terapeuta",
+    //image: require('../assets/quebra.png')
+  },
+
+  {
+    title: "4. Empatia Situacional",
+    text: "Identificar emoções em outros com base em situações cotidianas",
+    // name: "Nome da Terapeuta",
+    //image: require('../assets/espelho.png')
+  },
+
+  {
+    title: "5. Empatia Estruturada",
+    text: "Praticar a empatia através de jogos e atividades estruturadas",
+    //name: "Nome da Terapeuta",
+    //image: require('../assets/cerebro.png')
   },
  
 ];
@@ -20,7 +49,7 @@ const ConsultaScreen = ({ navigation }) => {
   const theme = useTheme();
 
   const handleCardPress = (title) => {
-    navigation.navigate('RegulacaoEmocionalScreen', { title });
+    navigation.navigate('IdentificacaoEmocoesScreen', { title });
   };
 
   const handleInicioPress = () => {
@@ -30,16 +59,17 @@ const ConsultaScreen = ({ navigation }) => {
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <View style={[styles.header, { backgroundColor: theme.colors.primary }]}>
-        <Text style={[styles.headerText, { color: theme.colors.surface }]}>Áreas de Foco</Text>
+        <Text style={[styles.headerText, { color: theme.colors.surface }]}>Regulação Emocional</Text>
       </View>
-
       
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
 
-        <TextCard
-          title="Escolha uma área para explorar atividades que ajudem no desenvolvimento da criança."
-        />
         
+        <TextCard
+          title="Desenvolver habilidades para identificar, expressar e gerenciar emoções de forma adequada"
+        />
+        <Text style={styles.textoetapas}>Etapas</Text>
+
 
         {consultas.map((consulta, index) => (
           <TouchableOpacity
@@ -47,7 +77,7 @@ const ConsultaScreen = ({ navigation }) => {
             onPress={() => handleCardPress(consulta.title)}
             style={styles.cardContainer}
           >
-            <ConsultaCard title={consulta.title} image={consulta.image} />
+            <ConsultaCard title={consulta.title} image={consulta.image}  text={consulta.text}/>
             </TouchableOpacity>
         ))}
       </ScrollView>
@@ -90,6 +120,7 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     marginBottom: 20,
+
   },
   footer: {
     flexDirection: 'row',
@@ -105,6 +136,12 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#FFFFFF',
   },
+
+  textoetapas:{
+    fontWeight: "bold",
+    padding: 9
+  },
+
 });
 
 export default ConsultaScreen;

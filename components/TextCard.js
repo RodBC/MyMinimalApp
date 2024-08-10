@@ -4,14 +4,13 @@ import { useTheme } from '@emotion/react';
 
 const { height, width } = Dimensions.get('window');
 
-const ConsultaCard = ({ title, image, text }) => {
+const TextCard = ({ title, image }) => {
   const theme = useTheme();
 
   return (
-    <View style={[styles.card, { backgroundColor: theme.colors.primary }]}>
+    <View style={[styles.card, { backgroundColor: theme.colors.color1 }]}>
       <View style={styles.textContainer}>
-        <Text style={[styles.title, { color: theme.colors.surface }]}>{title}</Text>
-        <Text style={[styles.text, { color: theme.colors.surface }]}>{text}</Text>
+        <Text style={[styles.title]}>{title}</Text>
       </View>
       <Image source={image} style={styles.image} resizeMode="contain" />
 
@@ -31,24 +30,19 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    height: height * 0.15,  // 15% da altura da tela
     width: '100%',
+    borderWidth: 0.7,
+    borderColor: 'gray',
   },
-  image: {
-    width: '20%', 
-    height: '80%', 
-    },
+  
   textContainer: {
     flex: 1,
   },
   title: {
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: 13,
+    
   },
 
-  text: {
-    marginTop: 20,
-  }
 });
 
-export default ConsultaCard;
+export default TextCard;

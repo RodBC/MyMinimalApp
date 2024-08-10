@@ -10,12 +10,14 @@ const atividade = {
   title: "Prendedores de Roupa",
   videoTitle: "Assistir Vídeo",
   videoIcon: "play-circle-outline",
-  objetivo: "Desenvolver a coordenação motora fina e o reconhecimento de cores e formas.",
-  materiais: "Grampo de prendedor de roupa coloridos e cartões com formas desenhadas.",
+  objetivo: "Desenvolver a habilidade de identificar e nomear emoções usando uma cartilha específica.",
+  materiais: "Cartilha com cartas de emoções que incluem imagens e descrições de emoções como alegria, tristeza, raiva, medo, cansaço, tranquilidade e agitação.",
   comoFazer: [
-    "Mostre à criança como prender os grampos nos cartões, combinando as cores dos grampos com as formas.",
-    "Peça à criança para tentar fazer isso sozinha, ajudando apenas se necessário.",
-    "Elogie o esforço dela, independentemente de como ela realiza a tarefa."
+    "Mostre as cartas de emoções à criança.",
+    "Peça que identifique e nomeie as emoções das expressões faciais.",
+    "Incentive a criança a explicar por que escolheu cada emoção.",
+    "Utilize sugestções da cartilha sobre o que fazer quando sente cada emoção",
+    "Elogie o esforço, independente dos acetos."
   ],
   videoUri: require('../assets/video.mp4'), // Adicione o caminho do vídeo aqui
 };
@@ -39,7 +41,7 @@ const AtividadeScreen = ({ route, navigation }) => {
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
           <Ionicons name="arrow-back" size={24} color={theme.colors.surface} />
         </TouchableOpacity>
-        <Text style={[styles.headerText, { color: theme.colors.surface }]}>{title}</Text>
+        <Text style={[styles.headerText, { color: theme.colors.surface }]}> Cartilha de Emoções</Text>
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
@@ -112,6 +114,7 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 18,
     fontWeight: 'bold',
+    paddingRight: "25%"
   },
   scrollViewContent: {
     flexGrow: 1,
