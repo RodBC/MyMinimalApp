@@ -73,7 +73,7 @@ const HomeScreen = ({ navigation }) => {
       <View style={{ flex: 1, backgroundColor: theme.colors.primary, justifyContent: 'center', alignItems: 'center' }}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <Image source={require('../assets/logo-novo.png')} style={{ width: 40, height: 40 }} resizeMode="contain" />
-          <Text style={{ color: theme.colors.appName, fontSize: 24, marginLeft: 10 }}>ConectaTEA</Text>
+          <Text style={{ color: theme.colors.appName, fontSize: 24, marginLeft: 10 }}>ConecTEA</Text>
         </View>
       </View>
 
